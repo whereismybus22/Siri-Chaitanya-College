@@ -386,9 +386,7 @@
         let showCompleteMap = true;
         let map;
         let busMarkers = {
-            bus1: null,
-            bus2: null,
-            bus3: null
+            bus1: null
         };
         let deviceLocationMarker;
         let markersClusterGroup = L.markerClusterGroup({
@@ -438,9 +436,7 @@
                 const data = await response.json();
 
                 const busData = {
-                    bus1: filterBusData(data, 1190),
-                    bus2: filterBusData(data, 1191),
-                    bus3: filterBusData(data, 1192)
+                    bus1: filterBusData(data)
                 };
 
                 updateBusMarkers(busData);
@@ -456,20 +452,22 @@
             }
         }
 
-        function filterBusData(data, itemId) {
-            const mlrInstitute = data.find((entry) => entry.title === "sreejaschool@gmail.com");
-            if (!mlrInstitute) return null;
+        function filterBusData(data) {
+            if (!Array.isArray(data) || data.length === 0) return null;
 
-            const item = mlrInstitute.items.find((item) => item.id === itemId);
-            if (!item) return null;
+            const entry = data[0]; // Assuming the data contains only one object per request
+            const { latitude, longitude, speed } = entry;
 
-            const { lat, lng, speed } = item;
-            return { lat, lng, speed };
+            return {
+                lat: latitude,
+                lng: longitude,
+                speed: speed * 1.609, // Convert speed to km/h
+            };
         }
 
         async function updateDeviceLocationMarker() {
             try {
-                
+
                 if (!localStorage.getItem("userDeviceLocation")) {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(
@@ -523,9 +521,7 @@
 
         function updateBusMarkers(busData) {
             const busIcons = {
-                bus1: '/img/one.svg',
-                bus2: '/img/two.svg',
-                bus3: '/img/three.png',
+                bus1: '/img/one.svg'
             };
 
             // Clear previous markers from the cluster group
