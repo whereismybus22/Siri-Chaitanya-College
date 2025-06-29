@@ -5,9 +5,7 @@ const clearSearch = document.getElementById("clearSearch");
 let selectedRoute = localStorage.getItem("defaultBusRoute") || null;
 
 const busRoutes = [
-    ["route1", "Route 1"],
-    ["route2", "Route 2"],
-    ["route3", "Route 3"]
+    ["route1", "Route 1"]
 ];
 
 function renderRoutes(filter = "") {

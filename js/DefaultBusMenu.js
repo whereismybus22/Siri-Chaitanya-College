@@ -18,9 +18,7 @@ const cancelClosePopup = document.getElementById("cancelClosePopup");
 const ackCancelok = document.getElementById("ackCancelok");
 
 const busRoutes = [
-    ["route1", "Route 1"],
-    ["route2", "Route 2"],
-    ["route3", "Route 3"]
+    ["route1", "Route 1"]
 ];
 
 function renderRoutes(filter = "") {

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const mlrit = { lat: 17.595580940309862, lng: 78.44159359579915 }; 
+  const mlrit = { lat: 17.24106224166774, lng: 80.13949776402691 };   
   const map = new google.maps.Map(document.getElementById("map"), {
     center: mlrit,
     zoom: 18,
