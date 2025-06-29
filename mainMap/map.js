@@ -106,7 +106,14 @@ async function fetchBusLocation() {
   const url = `https://portal.hypegpstracker.com/api/get_devices?user_api_hash=${auth}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
     const data = await response.json();
     const filteredData = filterData(data);
 
@@ -256,7 +263,7 @@ async function fetchBusLocation() {
 }
 
 function filterData(data) {
-  const mlrInstitute = data.find((entry) => entry.title === "sreejaschool@gmail.com");
+  const mlrInstitute = data.find((entry) => entry.id === 1501466);
   if (!mlrInstitute) return null;
 
   const item = mlrInstitute.items.find((item) => item.id === thisRouteID);
