@@ -102,8 +102,8 @@ function calculateDistanceTimeSpeed(locationOne, locationTwo, speed) {
 async function fetchBusLocation() {
 
   // const auth = await hypegpstracker(whereismybus);
-  const auth = '$2y$10$mUiiGZjTiDatqMEvRhlRAeqVpQlLAW5psz/IchLS/JzBh0HQ9uHDy';
-  const url = `https://portal.hypegpstracker.com/api/get_devices?user_api_hash=${auth}`;
+  const token = 'RzBFAiEAqnthKSztEUxAa2pZG8lhB7LoqTFpv2M46hKWRRTBSB8CIHfHrp3p6VloF3LEYR0DNkskBhwcERic7db5JSy6bzjFeyJ1Ijo2Mzk0MCwiZSI6IjIwMjYtMDYtMjlUMTg6MzA6MDAuMDAwKzAwOjAwIn0';
+  const url = 'https://demo.traccar.org/api/positions';
 
   try {
     const response = await fetch(url, {
