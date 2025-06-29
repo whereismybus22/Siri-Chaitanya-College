@@ -108,12 +108,15 @@ async function fetchBusLocation() {
   try {
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${auth}`,
+      },
     });
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      console.error(`Error fetching data: ${response.statusText}`);
+      return;
     }
+
     const data = await response.json();
     const filteredData = filterData(data);
 
@@ -263,14 +266,16 @@ async function fetchBusLocation() {
 }
 
 function filterData(data) {
-  const mlrInstitute = data.find((entry) => entry.id === 1501466);
-  if (!mlrInstitute) return null;
+  if (!Array.isArray(data) || data.length === 0) return null;
 
-  const item = mlrInstitute.items.find((item) => item.id === thisRouteID);
-  if (!item) return null;
+  const entry = data[0]; // Assuming the data contains only one object per request
+  const { latitude, longitude, speed } = entry;
 
-  const { lat, lng, speed } = item;
-  return { lat, lng, speed };
+  return {
+    lat: latitude,
+    lng: longitude,
+    speed: speed * 1.609, // Convert speed to km/h
+  };
 }
 
 
