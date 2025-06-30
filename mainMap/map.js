@@ -372,7 +372,7 @@ var path = "";
 if (istTime >= 2 && istTime <= 13) {
   path = `/vehicleRoutes/morning/${thisRoute}.json`;
 } else {
-  path = `/vehicleRoutes/morning/${thisRoute}.json`;
+  path = `/vehicleRoutes/evening/${thisRoute}.json`;
 }
 
 fetch(path)
