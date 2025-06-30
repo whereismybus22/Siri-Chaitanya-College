@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const videoTrigger = document.getElementById('videoTrigger');
   const openVideoBtn = document.getElementById('openVideoBtn');
-  const youtubeLink = "https://youtu.be/bhtDIswoDvo?si=0SIyQroD3Su_fo-8";
+  const youtubeLink = "https://youtu.be/sjNcwHucais";
 
   function openYouTubeVideo() {
     localStorage.setItem("isTutorialSeen", JSON.stringify(true));
