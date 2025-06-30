@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const incharges = [
-        { name: "Incharge 1", description: "Bus Route 1", phone: "tel:1234567890", whatsapp: "https://wa.me/1234567890" }
+        { name: "Incharge 1", description: "Bhaskar", phone: "tel:9398546535", whatsapp: "https://wa.me/9398546535" }
     ];
 
     const drivers = [
-        { name: "Route 1", description: "Name 1", phone: "tel:1234567890", whatsapp: "https://wa.me/1234567890" }
+        { name: "Route 1", description: "Bus Driver", phone: "tel:9550425792", whatsapp: "https://wa.me/9550425792" }
     ];
 
     const inchargeContainer = document.getElementById("busIncharge");
