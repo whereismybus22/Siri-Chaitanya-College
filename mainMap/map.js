@@ -102,21 +102,11 @@ function calculateDistanceTimeSpeed(locationOne, locationTwo, speed) {
 async function fetchBusLocation() {
 
   // const auth = await hypegpstracker(whereismybus);
-  const auth = 'RzBFAiEAj0-z4WfV-q46sVbqWtyzP4Is0YqxBoUNdSYgK3ldxKoCIERag1jrS97AEASdei9LMaiqYBoPymHHpdx7LX6Pf0JGeyJ1Ijo4NDY0MSwiZSI6IjIwMjYtMDYtMjlUMTg6MzA6MDAuMDAwKzAwOjAwIn0';
-  const url = 'https://demo.traccar.org/api/positions';
+  const auth = '$2y$10$mUiiGZjTiDatqMEvRhlRAeqVpQlLAW5psz/IchLS/JzBh0HQ9uHDy';
+  const url = `https://portal.hypegpstracker.com/api/get_devices?user_api_hash=${auth}`;
 
   try {
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    });
-
-    if (!response.ok) {
-      console.error(`Error fetching data: ${response.statusText}`);
-      return;
-    }
-
+    const response = await fetch(url);
     const data = await response.json();
     const filteredData = filterData(data);
 
@@ -266,17 +256,16 @@ async function fetchBusLocation() {
 }
 
 function filterData(data) {
-  if (!Array.isArray(data) || data.length === 0) return null;
+  const mlrInstitute = data.find((entry) => entry.title === "Ungrouped");
+  if (!mlrInstitute) return null;
 
-  const entry = data[0]; // Assuming the data contains only one object per request
-  const { latitude, longitude, speed } = entry;
+  const item = mlrInstitute.items.find((item) => item.id === thisRouteID);
+  if (!item) return null;
 
-  return {
-    lat: latitude,
-    lng: longitude,
-    speed: speed * 1.609, // Convert speed to km/h
-  };
+  const { lat, lng, speed } = item;
+  return { lat, lng, speed };
 }
+
 
 
 function interpolatePosition(start, end, progress) {
@@ -486,4 +475,4 @@ map.on("dragstart", function () {
 });
 
 fetchBusLocation();
-setInterval(fetchBusLocation, 10000);
+setInterval(fetchBusLocation, 5000);
